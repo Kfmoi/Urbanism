@@ -1,4 +1,4 @@
-# Assignment A2: Mesh Generator
+# Assignment A4: Mesh Generator
 
   - Khalid Farag [faragk1@mcmaster.ca]
 
