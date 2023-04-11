@@ -4,20 +4,23 @@ import java.util.List;
 
 import ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT.*;
 
-public interface PathFinder<T, G> {
-    List<Integer> findPath();
+public interface PathFinder {
+    List<Integer> findPath(Graph garph, int startNode, int endNode);
 
-    void setGraph(Graph<T,G> graph);
+    void setGraph(Graph graph);
 
     void setStartNode(int startNode);
+
+    int getStartNode();
+
+    int getEndNode();
 
     void setEndNode(int endNode);
 
     double getPathCost();
 
-    List<Node<T,G>> getPathNodes();
-
-    List<Edge<T,G>> getPathEdges();
+    List<Integer> getPathEdges();
 
     List<Integer> getPath();
+
 }
