@@ -1,77 +1,60 @@
 package ca.mcmaster.cas.se2aa4.a4.pathfinder.graphADT;
 
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-
+import ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT.EdgeImpl;
 
 public class EdgeImplTest {
-    Edge<String,Double> edge;
-    Node<String,Double> nodeA;
-    Node<String,Double> nodeB;
 
-    @BeforeEach
-    public void setUp() {
-        nodeA = new NodeImpl<String,Double>("A", 0.0, 0);
-        nodeB = new NodeImpl<String,Double>("B", 0.0, 1);
-        edge = new EdgeImpl<>(nodeA, nodeB, 0.0, 0);
-    }
+    private EdgeImpl edge = new EdgeImpl(0, 10.0, 1, 2);
+
 
 
     @Test
     public void testGetCost() {
-        assertEquals(0.0, edge.getCost());
+        assertEquals(10.0, edge.getCost(), 0.0);
     }
 
     @Test
-    public void testGetStartNode() {
-        assertEquals(nodeA, edge.getStartNode());
+    public void testGetSourceIndex() {
+        assertEquals(1, edge.getSourceIndex());
     }
 
     @Test
-    public void testGetEndNode() {
-        assertEquals(nodeB, edge.getEndNode());
-    }
-
-    @Test
-    public void testGetIndex() {
-        assertEquals(0, edge.getIndex());
-    }
-
-
-    @Test
-    public void testNotEquals() {
-        Edge<String,Double> edge2 = new EdgeImpl<>(nodeA, nodeB, 0.0, 1);
-        assertNotEquals(edge, edge2);
+    public void testGetDestinationIndex() {
+        assertEquals(2, edge.getDestinationIndex());
     }
 
     @Test
     public void testSetCost() {
-        edge.setCost(1.0);
-        assertEquals(1.0, edge.getCost());
+        edge.setCost(5.0);
+        assertEquals(5.0, edge.getCost(), 0.0);
     }
 
     @Test
-    public void testSetStartNode() {
-        Node<String,Double> nodeC = new NodeImpl<String,Double>("C", 0.0, 2);
-        edge.setStartNode(nodeC);
-        assertEquals(nodeC, edge.getStartNode());
+    public void testSetSourceIndex() {
+        edge.setSourceIndex(3);
+        assertEquals(3, edge.getSourceIndex());
     }
 
     @Test
-    public void testSetEndNode() {
-        Node<String,Double> nodeC = new NodeImpl<String,Double>("C", 0.0, 2);
-        edge.setEndNode(nodeC);
-        assertEquals(nodeC, edge.getEndNode());
+    public void testSetDestinationIndex() {
+        edge.setDestinationIndex(4);
+        assertEquals(4, edge.getDestinationIndex());
     }
 
     @Test
     public void testSetIndex() {
         edge.setIndex(1);
         assertEquals(1, edge.getIndex());
+    }
+
+    @Test
+    public void testGetIndex() {
+        assertEquals(0, edge.getIndex());
     }
 
 }
