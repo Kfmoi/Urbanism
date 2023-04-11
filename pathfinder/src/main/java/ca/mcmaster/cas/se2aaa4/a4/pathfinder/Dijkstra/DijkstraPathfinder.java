@@ -6,61 +6,53 @@ import ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT.Edge;
 import ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT.Graph;
 import ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT.Node;
 
-public class DijkstraPathfinder<T,G> implements PathFinder<T,G> {
+public class DijkstraPathfinder implements PathFinder {
 
-    private Graph<T,G> graph;
+    private Graph graph;
     private int startNode;
     private int endNode;
     private double pathCost;
-    private List<Node<T,G>> pathNodes;
-    private List<Edge<T,G>> pathEdges;
-    private List<Integer> path;
+    private List<Node> pathNodes = new ArrayList<>();
+    private List<Edge> pathEdges = new ArrayList<>();
 
-    public DijkstraPathfinder(Graph<T,G> graph, int startNode, int endNode) {
+    public DijkstraPathfinder(Graph graph, int startNode, int endNode) {
         this.graph = graph;
         this.startNode = startNode;
         this.endNode = endNode;
-        this.pathCost = 0.0;
-        this.pathNodes = new ArrayList<>();
-        this.pathEdges = new ArrayList<>();
-        this.path = new ArrayList<>();
     }
 
 
   @Override
-  public List<Integer> findPath() {
+  public List<Integer> findPath(Graph graph, int startNode, int endNode) {
      int n = graph.getNumberOfNodes();
      double[] distance = new double[n];
     int[] previous = new int[n];
-    PriorityQueue<Integer> queue = new PriorityQueue<>(n, Comparator.comparingDouble(i -> distance[i]));
+    int currentindex;
+    PriorityQueue<Integer> queue = new PriorityQueue<Integer>(n, Comparator.comparingDouble(i -> distance[i]));
+    Arrays.fill(previous, -1);
     Arrays.fill(distance, Double.MAX_VALUE);
     distance[startNode] = 0.0;
     queue.add(startNode);
 
     while (!queue.isEmpty()) {
-      int u = queue.poll();
-      if (u == endNode){
+      currentindex = queue.remove();
+      if (currentindex == endNode){
         break;
       }
-      for (int v : graph.getNeighbours(u)) {
-        int edgeWeight = graph.getEdgeIndex(u, v);
-
-        if (edgeWeight != -1) {
-            Edge<T,G> edge = graph.getEdges().get(edgeWeight);
-            double cost = distance[u] + edge.getCost();
-            if (cost < distance[v]) {
-                distance[v] = cost;
-                previous[v] = u;
-                queue.remove(v);
-                queue.add(v);
-            }
+      for (int edgeIndex : graph.getNeighbours(currentindex)) {
+        Edge edge = graph.getEdges().get(edgeIndex);
+        double cost = distance[currentindex] + edge.getCost();
+        if (cost < distance[edge.getDestinationIndex()]) {
+            distance[edge.getDestinationIndex()] = cost;
+            previous[edge.getDestinationIndex()] = currentindex;
+            queue.add(edge.getDestinationIndex());
         }
     }
 
   }
             List<Integer> path = new ArrayList<>();
             int current = endNode;
-            while (current != startNode && current != startNode) {
+            while (previous[current] != -1 || current != startNode) {
                 path.add(current);
                 current = previous[current];
             }
@@ -71,9 +63,8 @@ public class DijkstraPathfinder<T,G> implements PathFinder<T,G> {
                 for (int i = 0; i < path.size() - 1; i++) {
                     int uIndex = path.get(i);
                     int vIndex = path.get(i + 1);
-                    Node<T,G> uNode = graph.getNodes().get(uIndex);
-                    Node<T,G> vNode = graph.getNodes().get(vIndex);
-                    Edge<T,G> edges = graph.getEdges().get(graph.getEdgeIndex(uIndex, vIndex));
+                    Node uNode = graph.getNodes().get(uIndex);
+                    Edge edges = graph.getEdges().get(graph.getEdgeIndex(uIndex, vIndex));
                     pathNodes.add(uNode);
                     pathEdges.add(edges);
                 }
@@ -83,7 +74,7 @@ public class DijkstraPathfinder<T,G> implements PathFinder<T,G> {
     }
 
 @Override
-public void setGraph(Graph<T, G> graph) {
+public void setGraph(Graph graph) {
     this.graph = graph;
 }
 
@@ -102,18 +93,32 @@ public double getPathCost() {
     return pathCost;
 }
 
-@Override
-public List<Node<T, G>> getPathNodes() {
-    return pathNodes;
-}
 
 @Override
-public List<Edge<T, G>> getPathEdges() {
-    return pathEdges;
+public List<Integer> getPathEdges() {
+    List<Integer> edges = new ArrayList<>();
+    for (Edge edge : pathEdges) {
+        edges.add(edge.getIndex());
+    }
+    return edges;
 }
 
 @Override
 public List<Integer> getPath() {
-    return path;
+    return findPath(graph, startNode, endNode);
 }
+
+
+@Override
+public int getStartNode() {
+    return startNode;
+}
+
+
+@Override
+public int getEndNode() {
+    return endNode;
+}
+
+
 }
