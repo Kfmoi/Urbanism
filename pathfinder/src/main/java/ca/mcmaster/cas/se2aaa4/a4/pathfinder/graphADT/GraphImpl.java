@@ -3,16 +3,13 @@ package ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GraphImpl<T, G> implements Graph<T,G> {
-    private List<Node<T, G>> nodes;
-    private List<Edge<T, G>> edges;
+public class GraphImpl implements Graph {
+    private List<Node> nodes = new ArrayList<>();
+    private List<Edge> edges = new ArrayList<>();
     private List<List<Integer>> neighList;
-    private int edgeIndex;
 
     public GraphImpl(int size) {
-        nodes = new ArrayList<Node<T, G>>(size);
-        edges = new ArrayList<Edge<T, G>>(size);
-        neighList = new ArrayList<List<Integer>>(size);
+        neighList = new ArrayList<List<Integer>>();
         for (int i = 0; i < size; i++) {
             neighList.add(new ArrayList<Integer>());
         }
@@ -29,12 +26,12 @@ public class GraphImpl<T, G> implements Graph<T,G> {
     }
 
     @Override
-    public List<Node<T, G>> getNodes() {
+    public List<Node> getNodes() {
         return nodes;
     }
 
     @Override
-    public List<Edge<T, G>> getEdges() {
+    public List<Edge> getEdges() {
         return edges;
     }
 
@@ -45,17 +42,24 @@ public class GraphImpl<T, G> implements Graph<T,G> {
 
     @Override
     public int getEdgeIndex(int startNode, int endNode) {
-        return edgeIndex;
+        for (int i = 0; i < edges.size(); i++) {
+            if (edges.get(i).getSourceIndex() == startNode && edges.get(i).getDestinationIndex() == endNode) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
-    public void addNode(Node<T, G> node) {
+    public void addNode(Node node) {
         nodes.add(node);
+        node.setIndex(nodes.size() - 1);
     }
 
     @Override
-    public void addEdge(Edge<T, G> edge) {
+    public void addEdge(Edge edge) {
         edges.add(edge);
+        edge.setIndex(edges.size() - 1);
     }
 
     @Override
