@@ -1,11 +1,11 @@
 package ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT;
 
 
-public interface Node<T,G> {
-        T getValue();
-        G getWeight();
-        void setWeight(G weight);
-        void setValue (T value);
+public interface Node {
+        double getCost();
+        void setCost(double cost);
         void setIndex (int index);
         int getIndex();
+        Object getProperty(String property);
+        void setProperty(String property, Object value);
     }

@@ -1,36 +1,19 @@
 package ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT;
 
+import java.util.HashMap;
+import java.util.Map;
 
-public class NodeImpl<T,G> implements Node<T,G> {
-    private T value;
-    private G weight;
+public class NodeImpl implements Node {
+    private double cost;
+    private Map<String, Object> properties = new HashMap<>();
     private int index;
 
-    public NodeImpl(T value, G weight, int index) {
-        this.value = value;
-        this.weight = weight;
+    public NodeImpl(double cost, int index) {
+        this.cost = cost;
         this.index = index;
     }
 
-    @Override
-    public T getValue() {
-        return value;
-    }
 
-    @Override
-    public G getWeight() {
-        return weight;
-    }
-
-    @Override
-    public void setWeight(G weight) {
-        this.weight = weight;
-    }
-
-    @Override
-    public void setValue(T value) {
-        this.value = value;
-    }
 
     @Override
     public void setIndex(int index) {
@@ -40,6 +23,34 @@ public class NodeImpl<T,G> implements Node<T,G> {
     @Override
     public int getIndex() {
         return index;
+    }
+
+
+
+    @Override
+    public double getCost() {
+        return cost;
+    }
+
+
+
+    @Override
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+
+
+    @Override
+    public Object getProperty(String property) {
+        return properties.get(property);
+    }
+
+
+
+    @Override
+    public void setProperty(String property, Object value) {
+        properties.put(property, value);
     }
 
 
