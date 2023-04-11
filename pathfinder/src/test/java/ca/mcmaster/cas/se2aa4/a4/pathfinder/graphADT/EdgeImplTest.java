@@ -2,7 +2,6 @@ package ca.mcmaster.cas.se2aa4.a4.pathfinder.graphADT;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT.EdgeImpl;
