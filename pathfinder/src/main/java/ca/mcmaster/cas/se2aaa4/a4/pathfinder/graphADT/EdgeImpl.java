@@ -1,20 +1,19 @@
 package ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT;
 
 
-public class EdgeImpl<T,G> implements Edge<T,G> {
+public class EdgeImpl implements Edge {
 
     private double cost;
-    private Node<T,G> startNode;
-    private Node<T,G> endNode;
+    private int sourceIndex;
+    private int destinationIndex;
     private int index;
 
-    public EdgeImpl(Node<T,G> startNode, Node<T,G> endNode, double cost, int index) {
-        this.startNode = startNode;
-        this.endNode = endNode;
+    public EdgeImpl(int index, double cost, int sourceIndex, int destinationIndex) {
         this.cost = cost;
+        this.sourceIndex = sourceIndex;
+        this.destinationIndex = destinationIndex;
         this.index = index;
     }
-
 
     @Override
     public double getCost() {
@@ -22,23 +21,23 @@ public class EdgeImpl<T,G> implements Edge<T,G> {
     }
 
     @Override
-    public Node<T, G> getStartNode() {
-        return startNode;
+    public int getDestinationIndex() {
+        return destinationIndex;
     }
 
     @Override
-    public Node<T, G> getEndNode() {
-        return endNode;
+    public int getSourceIndex() {
+        return sourceIndex;
     }
 
     @Override
-    public void setStartNode(Node<T, G> startNode) {
-        this.startNode = startNode;
+    public void setDestinationIndex(int destinationIndex) {
+        this.destinationIndex = destinationIndex;
     }
 
     @Override
-    public void setEndNode(Node<T, G> endNode) {
-        this.endNode = endNode;
+    public void setSourceIndex(int sourceIndex) {
+        this.sourceIndex = sourceIndex;
     }
 
     @Override
@@ -55,6 +54,8 @@ public class EdgeImpl<T,G> implements Edge<T,G> {
     public int getIndex() {
         return index;
     }
+
+
     
 }
 
