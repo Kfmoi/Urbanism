@@ -1,59 +1,51 @@
 package ca.mcmaster.cas.se2aa4.a4.pathfinder.graphADT;
 
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-
+import ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT.NodeImpl;
 
 public class NodeImplTest {
-    Node<String,Double> node;
 
-
-    @BeforeEach
-    public void setUp() {
-        node = new NodeImpl<String,Double>("A", 0.0, 0);
+    @Test
+    public void testGetCost() {
+        NodeImpl node = new NodeImpl(10.0, 1);
+        assertEquals(10.0, node.getCost(), 0.0001);
     }
 
     @Test
-    public void testGetLabel() {
-        assertEquals("A", node.getValue());
+    public void testSetCost() {
+        NodeImpl node = new NodeImpl(10.0, 1);
+        node.setCost(20.0);
+        assertEquals(20.0, node.getCost(), 0.0001);
     }
 
     @Test
-    public void testGetWeight() {
-        assertEquals(0.0, node.getWeight());
+    public void testGetProperty() {
+        NodeImpl node = new NodeImpl(10.0, 1);
+        node.setProperty("foo", "bar");
+        assertEquals("bar", node.getProperty("foo"));
     }
 
     @Test
-    public void testSetWeight() {
-        node.setWeight(1.0);
-        assertEquals(1.0, node.getWeight());
-    }
-
-    @Test
-    public void testSetLabel() {
-        node.setValue("B");
-        assertEquals("B", node.getValue());
+    public void testSetProperty() {
+        NodeImpl node = new NodeImpl(10.0, 1);
+        node.setProperty("foo", "bar");
+        assertEquals("bar", node.getProperty("foo"));
     }
 
     @Test
     public void testGetIndex() {
-        assertEquals(0, node.getIndex());
+        NodeImpl node = new NodeImpl(10.0, 1);
+        assertEquals(1, node.getIndex());
     }
 
     @Test
     public void testSetIndex() {
-        node.setIndex(1);
-        assertEquals(1, node.getIndex());
+        NodeImpl node = new NodeImpl(10.0, 1);
+        node.setIndex(2);
+        assertEquals(2, node.getIndex());
     }
 
-
-    @Test
-    public void testNotEquals() {
-        Node<String,Double> node2 = new NodeImpl<String,Double>("A", 0.0, 1);
-        assertNotEquals(node, node2);
-    }
 }
