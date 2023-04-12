@@ -41,11 +41,14 @@ public class IslandCommandLine {
             "Soil Absorption Type :: Default is Normal");
     private static Option mode = new Option("m", "mode", true,
             "Mode type :: This is a required option");
+    private static Option numOfCities = new Option("c", "cities", true,
+            "The number of cities :: MIN = 0");
     private static Options options = new Options();
     private static HelpFormatter formatter = new HelpFormatter();
 
     // Adds the different options to the type Options
     public void addOptions() {
+        options.addOption(numOfCities);
         options.addOption(aquiferTypes);
         options.addOption(lakeTypes);
         options.addOption(help);
@@ -172,6 +175,26 @@ public class IslandCommandLine {
             rivers = 0;
         }
         return rivers;
+    }
+
+    /**
+     * Gets the Number of Cities from the user
+     *
+     * @param parser Parser that scans the command line
+     * @param args   The input arguments that the parser will scan
+     * @return Number of Cities as an integer
+     */
+    public int getNumOfCities(CommandLineParser parser, String[] args) {
+        int cities = 0;
+        try {
+            CommandLine cmd = parser.parse(options, args);
+            if (cmd.hasOption(numOfCities)) {
+                cities = Integer.parseInt(cmd.getOptionValue(numOfCities));
+            }
+        } catch (ParseException | NumberFormatException e) {
+            cities = 0;
+        }
+        return cities;
     }
 
     /**
