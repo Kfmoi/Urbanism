@@ -18,6 +18,10 @@ mosser@azrael A2 % mvn install
 
 After installation, you'll find an application named `generator.jar` in the `generator` directory, and a file named `visualizer.jar` in the `visualizer` on.
 
+### City
+
+Note: The city implementation is completed, however it can not be visualzied. This is saved for future work.
+
 ### Generator
 
 To run the generator, go to the `generator` directory, and use `java -jar` to run the product. The product takes multiple arguments, each with its own switch as described below, the name of the file where the generated mesh will be stored as binary. Follow the instructions below.
@@ -97,6 +101,7 @@ Help
  -s,--seed <arg>           Seed :: Provides a random seed if not provided
  -sh,--shape <arg>         Shape type :: Default is Round
  -so,--soil <arg>          Soil Absorption Type :: Default is Normal
+ -c, --cities <arg>        The number of cities :: MIN = 0
 Files must contain .mesh at the end
 ```
 __Command Line Options__
