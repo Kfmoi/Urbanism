@@ -1,0 +1,123 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class DijkstraPathfinder {
+  + findPath(Graph, int, int): List<Integer>
+  + setStartNode(int): void
+  + setEndNode(int): void
+  + getPath(): List<Integer>
+  + getPathCost(): double
+  + getPathEdges(): List<Integer>
+  + getEndNode(): int
+  + getStartNode(): int
+  + setGraph(Graph): void
+}
+interface Edge << interface >> {
+  + setIndex(int): void
+  + getDestinationIndex(): int
+  + setDestinationIndex(int): void
+  + getSourceIndex(): int
+  + getCost(): double
+  + setCost(double): void
+  + getIndex(): int
+  + setSourceIndex(int): void
+}
+class EdgeImpl {
+  + getIndex(): int
+  + setIndex(int): void
+  + setSourceIndex(int): void
+  + setCost(double): void
+  + getDestinationIndex(): int
+  + setDestinationIndex(int): void
+  + getCost(): double
+  + getSourceIndex(): int
+}
+class EdgeImplTest {
+  + testSetIndex(): void
+  + testGetIndex(): void
+  + testGetDestinationIndex(): void
+  + testGetSourceIndex(): void
+  + testSetSourceIndex(): void
+  + testSetDestinationIndex(): void
+  + testGetCost(): void
+  + testSetCost(): void
+}
+interface Graph << interface >> {
+  + getNodes(): List<Node>
+  + getEdgeIndex(int, int): int
+  + addEdge(Edge): void
+  + getNumberOfEdges(): int
+  + addNode(Node): void
+  + getNumberOfNodes(): int
+  + getEdges(): List<Edge>
+  + setNeighbours(int, List<Integer>): void
+  + getNeighbours(int): List<Integer>
+}
+class GraphImpl {
+  + getEdges(): List<Edge>
+  + getNeighbours(int): List<Integer>
+  + addNode(Node): void
+  + addEdge(Edge): void
+  + setNeighbours(int, List<Integer>): void
+  + getNumberOfEdges(): int
+  + getNumberOfNodes(): int
+  + getNodes(): List<Node>
+  + getEdgeIndex(int, int): int
+}
+class GraphImplTest {
+  + testGetNeighbours(): void
+  + testGetNumberOfEdges(): void
+  + testAddNode(): void
+  + testGetNodes(): void
+  + testAddEdge(): void
+  + testGetEdges(): void
+  + testGetNumberOfNodes(): void
+}
+interface Node << interface >> {
+  + getProperty(String): Object
+  + setIndex(int): void
+  + getIndex(): int
+  + getCost(): double
+  + setCost(double): void
+  + setProperty(String, Object): void
+}
+class NodeImpl {
+  + setProperty(String, Object): void
+  + getProperty(String): Object
+  + getIndex(): int
+  + getCost(): double
+  + setIndex(int): void
+  + setCost(double): void
+}
+class NodeImplTest {
+  + testGetProperty(): void
+  + testSetCost(): void
+  + testSetProperty(): void
+  + testGetCost(): void
+  + testGetIndex(): void
+  + testSetIndex(): void
+}
+class NormalImplTest {
+  + testFindPath(): void
+  + testGetCost(): void
+  + setUp(): void
+  + testGetStartNode(): void
+  + testGetEndNode(): void
+  + testGetEdges(): void
+}
+interface PathFinder << interface >> {
+  + getStartNode(): int
+  + setStartNode(int): void
+  + getEndNode(): int
+  + findPath(Graph, int, int): List<Integer>
+  + getPathEdges(): List<Integer>
+  + setEndNode(int): void
+  + getPathCost(): double
+  + setGraph(Graph): void
+  + getPath(): List<Integer>
+}
+
+@enduml
