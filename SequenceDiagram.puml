@@ -1,0 +1,49 @@
+@startuml Island
+participant Actor
+Actor -> Main : main
+activate Main
+Main -> InputMesh 
+activate InputMesh
+InputMesh -> InputMesh : read
+activate AbstractBiomeFactory
+InputMesh -> AbstractBiomeFactory : createBiome
+AbstractBiomeFactory -> AbstractBiomeFactory : create
+AbstarctMoistureFactory -> InputMesh : read
+deactivate AbstractBiomeFactory
+activate AbstarctMoistureFactory
+InputMesh -> AbstarctMoistureFactory : createMoisture
+AbstarctMoistureFactory -> AbstarctMoistureFactory : create
+AbstarctMoistureFactory -> InputMesh : read
+deactivate AbstarctMoistureFactory
+activate AbstarctElevationFactory
+InputMesh -> AbstarctElevationFactory : createElevation
+AbstarctElevationFactory -> AbstarctElevationFactory : create
+AbstarctElevationFactory -> InputMesh : read
+deactivate AbstarctElevationFactory
+activate AbstractAquiferFactory
+InputMesh -> AbstractAquiferFactory : createAquifer
+AbstractAquiferFactory -> AbstractAquiferFactory : create
+AbstractAquiferFactory -> InputMesh : read
+deactivate AbstractAquiferFactory
+activate AbstarctLakeFactory
+InputMesh -> AbstarctLakeFactory : createLake
+AbstarctLakeFactory -> AbstarctLakeFactory : create
+AbstarctLakeFactory -> InputMesh : read
+deactivate AbstarctLakeFactory
+activate AbstarctCityFactory
+InputMesh -> AbstarctCityFactory : createCity
+AbstarctCityFactory -> AbstarctCityFactory : create
+AbstarctCityFactory -> InputMesh : read
+deactivate AbstarctCityFactory
+activate AbstractShaperFactory
+InputMesh -> AbstractShaperFactory : createShaper
+AbstractShaperFactory -> AbstractShaperFactory : create
+AbstractShaperFactory -> InputMesh : read
+deactivate AbstractShaperFactory
+InputMesh -> Main : createIsland
+deactivate InputMesh
+Main -> Actor : Output
+deactivate Main
+deactivate Actor
+return
+@enduml
