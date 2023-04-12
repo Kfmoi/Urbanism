@@ -1,4 +1,4 @@
-# Assignment A4: Mesh Generator
+# Assignment A4: URBANISM
 
   - Khalid Farag [faragk1@mcmaster.ca]
 
@@ -8,7 +8,11 @@ This module pathfinder, provides an implementation of a Graph data structure, an
 
 ## Using the Libary
 
+
 ### Creating a Graph
+
+The graph data structure is uses the `Node`, `Edge` and `Graph` interfaces. The `Node` class represents a node in the graph. The `Edge` class represents an edge in the graph. The `Graph` class represents the graph data structure.
+
 
 To create a graph, use the `Graph` class. The graph class has the following methods:
 
