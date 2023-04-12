@@ -25,7 +25,7 @@ public enum ComponentCollections {
     /* tiles that are going to be tracked */
     private Set<Integer> oceans = new HashSet<>(), lagoons = new HashSet<>(), shores = new HashSet<>(),
             innerLand = new HashSet<>(), aquifers = new HashSet<>(), lakes = new HashSet<>(),
-            freshWaterPoints = new HashSet<>(), riverPoints = new HashSet<>();
+            freshWaterPoints = new HashSet<>(), riverPoints = new HashSet<>(), cities = new HashSet<>(),nonCityPoints = new HashSet<>();
 
     public Iterable<Integer> getAllTileIdxs() {
         return allTiles.keySet();
@@ -63,6 +63,14 @@ public enum ComponentCollections {
         return lakes.contains(index);
     }
 
+    public boolean isNonCityTile(int index) {
+        return nonCityPoints.contains(index);
+    }
+
+    public boolean isCityTile(int index) {
+        return cities.contains(index);
+    }
+
     public boolean isAquiferTile(int index) {
         return aquifers.contains(index);
     }
@@ -87,12 +95,24 @@ public enum ComponentCollections {
         return aquifers;
     }
 
+    public Iterable<Integer> getCityPoints() {
+        return cities;
+    }
+
     public Iterable<Integer> getInnerLand() {
         return innerLand;
     }
 
     public Iterable<Integer> getFreshWaterPoints() {
         return freshWaterPoints;
+    }
+
+    public Iterable<Integer> getCities() {
+        return cities;
+    }
+
+    public Iterable<Integer> getNonCityPoints() {
+        return nonCityPoints;
     }
 
     public Iterable<Integer> getRiverPoints() {
@@ -145,6 +165,10 @@ public enum ComponentCollections {
 
     public int getTileColour(int index) {
         return allTiles.get(index).getColour();
+    }
+
+    public int getTileIndex(int index) {
+        return allTiles.get(index).getCentroidIndex();
     }
 
     public int getEdgeColour(int index) {
@@ -200,7 +224,7 @@ public enum ComponentCollections {
         }
         for (Polygon poly : mesh.getPolygonsList()) {
             Tile tile = new Tile(poly, mesh.getSegmentsList(), mesh.getVerticesList());
-            allTiles.put(tile.getIndex(), tile);
+            allTiles.put(tile.getCentroidIndex(), tile);
         }
     }
 
@@ -221,6 +245,7 @@ public enum ComponentCollections {
         innerLand.removeAll(lakes);
         updateFreshWaterPoints();
     }
+    
 
     public void updateAquifers(Set<Integer> aquifers) {
         this.aquifers = aquifers;
@@ -251,11 +276,25 @@ public enum ComponentCollections {
         allEdges.forEach((index, edge) -> edge.setColour(colours.get(index)));
     }
 
+
     private void updateFreshWaterPoints() {
         freshWaterPoints = new HashSet<>();
         for (Tile tile : allTiles.values()) {
-            if (lakes.contains(tile.getIndex()) || aquifers.contains(tile.getIndex())) {
+            if (lakes.contains(tile.getCentroidIndex()) || aquifers.contains(tile.getCentroidIndex())) {
                 freshWaterPoints.addAll(tile.getPointIdxs());
+            }
+        }
+    }
+
+    private void updateNonCityPoints() {
+        nonCityPoints = new HashSet<>();
+        TileTypes type;
+        for (Tile tile : allTiles.values()) {
+            type = tile.getTileType();
+            if ((type.equals(TileTypes.LAND))
+                    && !shores.contains(tile.getCentroidIndex())
+                    && !lakes.contains(tile.getCentroidIndex())) {
+                nonCityPoints.add(tile.getCentroidIndex());
             }
         }
     }
@@ -264,7 +303,7 @@ public enum ComponentCollections {
         lagoons = new HashSet<>();
         for (Tile tile : allTiles.values()) {
             if (tile.getTileType().equals(TileTypes.LAGOON)) {
-                lagoons.add(tile.getIndex());
+                lagoons.add(tile.getCentroidIndex());
             }
         }
     }
@@ -273,7 +312,7 @@ public enum ComponentCollections {
         oceans = new HashSet<>();
         for (Tile tile : allTiles.values()) {
             if (tile.getTileType().equals(TileTypes.OCEAN)) {
-                oceans.add(tile.getIndex());
+                oceans.add(tile.getCentroidIndex());
             }
         }
     }
@@ -288,7 +327,7 @@ public enum ComponentCollections {
             for (Integer neighbour : tile.getNeighbourIdxs()) {
                 type = allTiles.get(neighbour).getTileType();
                 if (type.equals(TileTypes.LAGOON) || type.equals(TileTypes.OCEAN)) {
-                    shores.add(tile.getIndex());
+                    shores.add(tile.getCentroidIndex());
                     continue;
                 }
             }
@@ -301,8 +340,8 @@ public enum ComponentCollections {
         for (Tile tile : allTiles.values()) {
             type = tile.getTileType();
             if ((type.equals(TileTypes.LAND))
-                    && !shores.contains(tile.getIndex())) {
-                innerLand.add(tile.getIndex());
+                    && !shores.contains(tile.getCentroidIndex())) {
+                innerLand.add(tile.getCentroidIndex());
             }
         }
     }

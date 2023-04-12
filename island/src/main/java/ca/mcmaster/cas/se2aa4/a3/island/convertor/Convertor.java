@@ -82,7 +82,7 @@ public class Convertor {
         Polygon.Builder polyBuilder;
         String fillRGBA, borderRGBA, thick;
         Property fill, border, thickness;
-        tiles.sort(Comparator.comparing(Tile::getIndex));
+        tiles.sort(Comparator.comparing(Tile::getCentroidIndex));
         borderRGBA = String.format("%08x", TRANSPARENT_COLOUR);
         thick = String.format("%.2f", DEFAULT_THICKNESS);
         border = Property.newBuilder()
@@ -109,7 +109,7 @@ public class Convertor {
             polyBuilder.addProperties(thickness)
                     .addProperties(border)
                     .addProperties(fill)
-                    .setCentroidIdx(tile.getIndex());
+                    .setCentroidIdx(tile.getCentroidIndex());
             polygons.add(polyBuilder.build());
         }
         return polygons;

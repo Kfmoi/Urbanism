@@ -73,7 +73,7 @@ public class Tile {
         return centreY;
     }
 
-    public int getIndex() {
+    public int getCentroidIndex() {
         return index;
     }
 
