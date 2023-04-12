@@ -120,4 +120,16 @@ interface PathFinder << interface >> {
   + getPath(): List<Integer>
 }
 
+EdgeImpl ..|>Edge
+GraphImpl ..|>Graph
+NodeImplTest ..|>Node
+DijkstraPathfinder ..|>PathFinder
+DijkstraPathfinder ..|>Edge
+DijkstraPathfinder ..|>Graph
+DijkstraPathfinder ..|>Node
+GraphImplTest ..|>GraphImpl
+EdgeImplTest ..|>EdgeImpl
+NodeImplTest ..|>NodeImpl
+NormalImplTest..|>DijkstraPathfinder
+
 @enduml
