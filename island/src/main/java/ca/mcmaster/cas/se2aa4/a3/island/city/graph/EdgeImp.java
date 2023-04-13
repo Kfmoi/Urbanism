@@ -1,4 +1,4 @@
-package ca.mcmaster.cas.se2aa4.a3.island.city;
+package ca.mcmaster.cas.se2aa4.a3.island.city.graph;
 
 import ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT.Edge;
 

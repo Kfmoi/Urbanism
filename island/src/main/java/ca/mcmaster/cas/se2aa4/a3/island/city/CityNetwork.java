@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import ca.mcmaster.cas.se2aa4.a3.island.city.graph.EdgeImp;
+import ca.mcmaster.cas.se2aa4.a3.island.city.graph.GraphImp;
+import ca.mcmaster.cas.se2aa4.a3.island.city.graph.NodeImp;
 import ca.mcmaster.cas.se2aa4.a3.island.components.ComponentCollections;
 import ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT.Graph;
 import ca.mcmaster.cas.se2aaa4.a4.pathfinder.graphADT.Node;

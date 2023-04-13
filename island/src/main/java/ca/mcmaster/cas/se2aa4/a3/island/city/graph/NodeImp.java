@@ -1,4 +1,4 @@
-package ca.mcmaster.cas.se2aa4.a3.island.city;
+package ca.mcmaster.cas.se2aa4.a3.island.city.graph;
 
 import java.util.HashMap;
 import java.util.Map;
