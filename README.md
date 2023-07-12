@@ -4,6 +4,34 @@
   - Khalid Farag [faragk1@mcmaster.ca]
   - Samih Dalvi [dalvis3@mcmaster.ca]
 
+## Who did what?
+
+### Mohammad Mahdi Mahboob
+
+- Shore level elevation 
+- Creating the lagoon islands
+- Creating a simple moisture profile for the island
+- Incorportated the effect of rivers on absorption ability of soil
+- Controlling river springs based on user input
+
+### Khalid Farag
+
+- Reproducibility by using a seed
+- Allow users to provide a custom seed
+- Created more lake profiles
+- Created more aquifer profiles
+- Some of the testing
+- Command line interface
+- Pathfinder
+
+### Samih Dalvi
+
+- Varying non-shore elevation based on distance from shore
+- Reproducibility by using a seed
+- Generating flat lakes with same elevation as the shore
+- Developimh a singular soil profile where the elevation affected the absorption ability of the soil
+- Some of the testing
+
 ## How to run the product
 
 ### Installation instructions
