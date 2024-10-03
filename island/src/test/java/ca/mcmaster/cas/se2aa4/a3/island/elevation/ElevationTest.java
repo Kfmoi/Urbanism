@@ -17,6 +17,7 @@ public class ElevationTest {
         assertEquals(ElevationLevels.LOW_ELEVATION, ranges.get(1.0 / 3.0));
         assertEquals(ElevationLevels.MEDIUM_ELEVATION, ranges.get(2.0 / 3.0));
         assertEquals(ElevationLevels.HIGH_ELEVATION, ranges.get(Double.MAX_VALUE));
+
     }
 
 }
