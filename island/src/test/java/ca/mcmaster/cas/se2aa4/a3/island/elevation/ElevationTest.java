@@ -10,6 +10,7 @@ public class ElevationTest {
     public void testNormalGetElevationRanges() {
 
         TreeMap<Double, ElevationLevels> ranges = NormalElevation.ELEVATION_RANGES;
+
         assertEquals(ElevationLevels.OCEAN_ELEVATION, ranges.get(-3.0));
         assertEquals(ElevationLevels.LAGOON_ELEVATION, ranges.get(-2.0));
         assertEquals(ElevationLevels.WATER_ELEVATION, ranges.get(-1.0));
