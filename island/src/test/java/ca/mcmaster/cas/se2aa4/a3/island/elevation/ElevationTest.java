@@ -3,7 +3,6 @@ package ca.mcmaster.cas.se2aa4.a3.island.elevation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.TreeMap;
-
 import org.junit.jupiter.api.Test;
 
 public class ElevationTest {
